@@ -21,5 +21,19 @@ public class Step1 {
         return numbers;
     }
 
+    // 3 * 6 형태로 출력하기
+    public static int[][] printGrid(List<Integer> numbers) {
+        int[][] grid = new int[3][6];
+        int index = 0;
+
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 6; j++) {
+                grid[i][j] = numbers.get(index);
+                index++;
+            }
+        }
+        return grid;
+    }
+
 
 }
