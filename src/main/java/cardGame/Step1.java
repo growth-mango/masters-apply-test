@@ -4,7 +4,8 @@ public class Step1 {
     public static void main(String[] args) {
         // 작성예정
         List<Integer> cards = generateNumbers();
-        System.out.println(Arrays.deepToString(printGrid(cards)));
+        int[][] grid = printGrid(cards);
+        System.out.println(Arrays.deepToString(grid));
 
     }
 
@@ -33,16 +34,18 @@ public class Step1 {
         }
         return grid;
     }
+//
+//    // 3 * 6 형태로 X 배열 출력하기
+//    public static void printGridX() {
+//        for (int i = 0; i < 3; i++) {
+//            for (int j = 0; j < 6; j++) {
+//                System.out.println("X ");
+//            }
+//            System.out.println();
+//        }
+//    }
 
-    // 3 * 6 형태로 X 배열 출력하기
-    public static void printGridX(int[][] grid) {
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 6; j++) {
-                System.out.println("X ");
-            }
-            System.out.println();
-        }
-    }
+
 
 
 }
