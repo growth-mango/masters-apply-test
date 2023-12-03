@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -7,16 +9,17 @@ public class Step1 {
 
     }
 
-    // 3행 6열
-    public static int[][] generateNumbers() {
-        int[][] grid = new int[3][6];
-        int num = 1;
-
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 6; j++) {
-                grid[i][j] = num;
-                num++;
-            }
+    // 1부터 8까지 세 번씩 들어간 숫자 리스트 생성
+    public static List<Integer> generateNumbers() {
+        List<Integer> numbers = new ArrayList<>();
+        for (int i = 1; i <= 8; i++) {
+            numbers.add(i);
+            numbers.add(i);
+            numbers.add(i);
         }
+        Collections.shuffle(numbers);
+        return numbers;
     }
+
+
 }
