@@ -7,28 +7,7 @@ import java.util.Scanner;
 
 public class Step2 {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        List<Integer> cards = generateNumbers();
-        int[][] grid = printGrid(cards);
-        printInitialGrid();
-        int attemptNumber = 1;
-        int remainingCards = 18;
 
-        while (!isGameOver(grid)) {
-            int[][] userInput = getUserInput(attemptNumber, remainingCards);
-            revealCards(grid, cards, userInput);
-            printUpdatedGrid(grid, userInput);
-            if (checkAndRemoveCards(grid, cards, userInput)) {
-                System.out.println("맞췄습니다!");
-                remainingCards -= 2;
-            }
-            if (remainingCards == 0 || !isMatchingPairAvailable(grid)) {
-                System.out.println("축하합니다! 모든 카드를 맞췄습니다.");
-                break;
-            }
-            attemptNumber++;
-        }
-        scanner.close();
     }
 
     // 1부터 8까지 세 번씩 들어간 숫자 리스트 생성
@@ -65,6 +44,20 @@ public class Step2 {
             }
             System.out.println();
         }
+    }
+
+    // 사용자에게 이름 입력받기
+    public static String[] getPlayerNames() {
+        Scanner scanner = new Scanner(System.in);
+        String[] names = new String[2];
+
+        System.out.print("1P의 이름을 입력하세요: ");
+        names[0] = scanner.nextLine();
+
+        System.out.print("2P의 이름을 입력하세요: ");
+        names[1] = scanner.nextLine();
+
+        return names;
     }
 
     // 사용자에게 좌표 입력받기
