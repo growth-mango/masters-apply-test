@@ -2,13 +2,27 @@ import java.util.*;
 
 public class Step1 {
     public static void main(String[] args) {
-        // 작성예정
+        Scanner scanner = new Scanner(System.in);
         List<Integer> cards = generateNumbers();
         int[][] grid = printGrid(cards);
-        System.out.println(Arrays.deepToString(grid));
-        System.out.println(Arrays.toString(getUserInput(1, 15)));
-        revealCards(grid, cards, getUserInput(1, 15));
+        printInitialGrid();
+        int attemptNumber = 1;
+        int remainingCards = 18;
 
+        while (!isGameOver(grid)) {
+            int[][] userInput = getUserInput(attemptNumber, remainingCards);
+            revealCards(grid, cards, userInput);
+            if (checkAndRemoveCards(grid, cards, userInput)) {
+                System.out.println("맞췄습니다!");
+                remainingCards -= 2;
+            }
+            if (remainingCards == 0 || !isMatchingPairAvailable(grid)) {
+                System.out.println("축하합니다! 모든 카드를 맞췄습니다.");
+                break;
+            }
+            attemptNumber++;
+        }
+        scanner.close();
     }
 
     // 1부터 8까지 세 번씩 들어간 숫자 리스트 생성
@@ -100,7 +114,6 @@ public class Step1 {
             int col = input[1];
             grid[row][col] = numbers.get(row * 6 + col);
         }
-        printUpdatedGrid(grid);
     }
 
     // 변경된 그리드 출력
@@ -150,7 +163,7 @@ public class Step1 {
             }
         }
 
-        return remainingCards > 1 ;
+        return remainingCards > 1;
 
     }
 
@@ -173,7 +186,5 @@ public class Step1 {
         }
         return false;
     }
-
-
 }
 
