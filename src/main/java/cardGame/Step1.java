@@ -12,6 +12,7 @@ public class Step1 {
         while (!isGameOver(grid)) {
             int[][] userInput = getUserInput(attemptNumber, remainingCards);
             revealCards(grid, cards, userInput);
+            printUpdatedGrid(grid, userInput);
             if (checkAndRemoveCards(grid, cards, userInput)) {
                 System.out.println("맞췄습니다!");
                 remainingCards -= 2;
