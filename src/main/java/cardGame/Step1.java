@@ -36,6 +36,16 @@ public class Step1 {
         return grid;
     }
 
+    // 초반에 X 출력
+    public static void printInitialGrid(){
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 5; j++) {
+                System.out.print("X ");
+            }
+            System.out.println();
+        }
+    }
+
     // 사용자에게 좌표 입력받기
     public static int[][] getUserInput(int attemptNumber, int remainingCards) {
         Scanner scanner = new Scanner(System.in);
@@ -81,5 +91,11 @@ public class Step1 {
         }
         return null;
     }
+
+    // 입력받은 좌표의 카드를 뒤집어서 보여주기
+
+    // 뒤집은 카드의 숫자가 서로 일치하는지 검증하는 로직
+
+    // 일치 한다면 그 좌표의 카드를 없애고 X 로 출력하기
 
 }
