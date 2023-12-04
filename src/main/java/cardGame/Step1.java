@@ -117,17 +117,27 @@ public class Step1 {
     }
 
     // 변경된 그리드 출력
-    public static void printUpdatedGrid(int[][] grid) {
+    public static void printUpdatedGrid(int[][] grid, int[][] revealedCoordinates) {
         for (int i = 0; i < grid.length; i++) {
             for (int j = 0; j < grid[i].length; j++) {
-                if (grid[i][j] == 0) {
-                    System.out.print("X ");
-                } else {
+                if (isCoordinateRevealed(i, j, revealedCoordinates)) {
                     System.out.print(grid[i][j] + " ");
+                } else {
+                    System.out.print("X ");
                 }
             }
             System.out.println();
         }
+    }
+
+    // 해당 좌표가 뒤집힌 자표인지 확인하기
+    private static boolean isCoordinateRevealed(int row, int col, int[][] revealedCoordinates) {
+        for (int[] coord : revealedCoordinates) {
+            if (coord[0] == row && coord[1] == col) {
+                return true;
+            }
+        }
+        return false;
     }
 
     // 뒤집은 카드의 숫자가 서로 일치하는지 검증하는 로직
