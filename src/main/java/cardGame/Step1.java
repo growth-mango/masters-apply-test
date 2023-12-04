@@ -133,7 +133,47 @@ public class Step1 {
         return false;
     }
 
-    // 일치 한다면 그 좌표의 카드를 없애고 X 로 출력하기
-
     // 게임 종료 로직
+    public static boolean isGameOver(int[][] grid) {
+        return !isRemainingCards(grid) || !isMatchingPairAvailable(grid); // 남은 카드가 없거나 맞출 수 있는 짝이 없으면
+    }
+
+    // 남은 카드 있는지 확인
+    private static boolean isRemainingCards(int[][] grid) {
+        int remainingCards = 0;
+
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid[i].length; j++) {
+                if (grid[i][j] != 0) {
+                    remainingCards++;
+                }
+            }
+        }
+
+        return remainingCards > 1 ;
+
+    }
+
+    // 매칭할 카드가 남았는지 확인
+    private static boolean isMatchingPairAvailable(int[][] grid) {
+        int[] cardCount = new int[9]; // 1부터 8까지의 카드 개수를 저장할 배열
+
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid[i].length; j++) {
+                int card = grid[i][j];
+                if (card != 0) {
+                    cardCount[card]++;
+                }
+            }
+        }
+        for (int count : cardCount) {
+            if (count > 1) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
 }
+
