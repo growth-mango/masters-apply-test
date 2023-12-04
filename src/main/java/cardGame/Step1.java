@@ -7,6 +7,7 @@ public class Step1 {
         int[][] grid = printGrid(cards);
         System.out.println(Arrays.deepToString(grid));
         System.out.println(Arrays.toString(getUserInput(1, 15)));
+        revealCards(grid, cards, getUserInput(1, 15));
 
     }
 
@@ -37,7 +38,7 @@ public class Step1 {
     }
 
     // 초반에 X 출력
-    public static void printInitialGrid(){
+    public static void printInitialGrid() {
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 5; j++) {
                 System.out.print("X ");
@@ -93,9 +94,32 @@ public class Step1 {
     }
 
     // 입력받은 좌표의 카드를 뒤집어서 보여주기
+    public static void revealCards(int[][] grid, List<Integer> numbers, int[][] inputs) {
+        for (int[] input : inputs) {
+            int row = input[0];
+            int col = input[1];
+            grid[row][col] = numbers.get(row * 6 + col);
+        }
+        printUpdatedGrid(grid);
+    }
+
+    // 변경된 그리드 출력
+    public static void printUpdatedGrid(int[][] grid) {
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid[i].length; j++) {
+                if (grid[i][j] == 0) {
+                    System.out.print("X ");
+                } else {
+                    System.out.print(grid[i][j] + " ");
+                }
+            }
+            System.out.println();
+        }
+    }
 
     // 뒤집은 카드의 숫자가 서로 일치하는지 검증하는 로직
 
     // 일치 한다면 그 좌표의 카드를 없애고 X 로 출력하기
 
+    // 게임 종료 로직
 }
