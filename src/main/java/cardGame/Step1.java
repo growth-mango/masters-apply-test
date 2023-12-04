@@ -118,6 +118,20 @@ public class Step1 {
     }
 
     // 뒤집은 카드의 숫자가 서로 일치하는지 검증하는 로직
+    public static boolean checkAndRemoveCards(int[][] grid, List<Integer> numbers, int[][] inputs) {
+        int firstRow = inputs[0][0];
+        int firstCol = inputs[0][1];
+        int secondRow = inputs[1][0];
+        int secondCol = inputs[1][1];
+
+        // 두 카드가 일치하는 경우
+        if (numbers.get(firstRow * 6 + firstCol).equals(numbers.get(secondRow * 6 + secondCol))) {
+            grid[firstRow][firstCol] = 0; // 첫 번째 좌표 카드 제거
+            grid[secondRow][secondCol] = 0; // 두 번째 좌표 카드 제거
+            return true;
+        }
+        return false;
+    }
 
     // 일치 한다면 그 좌표의 카드를 없애고 X 로 출력하기
 
