@@ -6,6 +6,9 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Step2 {
+    private static int player1Score = 0;
+    private static int player2Score = 0;
+
     public static void main(String[] args) {
 
     }
@@ -153,6 +156,17 @@ public class Step2 {
             return true;
         }
         return false;
+    }
+
+    // 점수 계산 ... 단순로직
+    public static void updatePlayerScore(int currentPlayer, boolean isCorrect){
+        if(isCorrect){
+            if (currentPlayer == 1){
+                player1Score += 10;
+            } else {
+                player2Score += 10;
+            }
+        }
     }
 
     // 게임 종료 로직
