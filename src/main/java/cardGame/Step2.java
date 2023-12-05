@@ -10,7 +10,51 @@ public class Step2 {
     private static int player2Score = 0;
 
     public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        List<Integer> cards = generateNumbers();
+        int[][] grid = printGrid(cards);
+        printInitialGrid();
 
+        String[] playerNames = getPlayerNames(); // 플레이어 이름 입력받기
+
+
+        int currentPlayer = 1;
+        boolean turnContinues = false;
+
+        while (!isGameOver(grid)) {
+            System.out.println(playerNames[currentPlayer - 1] + "의 차례입니다. 점수: " + (currentPlayer == 1 ? player1Score : player2Score));
+
+            int[][] userInput = getUserInput(playerNames[currentPlayer - 1]);
+
+            revealCards(grid, cards, userInput);
+            printUpdatedGrid(grid, userInput);
+
+
+            if (checkAndRemoveCards(grid, cards, userInput)) {
+                updatePlayerScore(currentPlayer, true);
+                System.out.println("맞췄습니다! 추가 찬스를 얻습니다.");
+
+                continue;
+            }
+
+            currentPlayer = (currentPlayer == 1) ? 2 : 1;
+
+        }
+
+        // 게임 종료 시 플레이어별 점수와 승리자 표시
+        System.out.println("게임이 끝났습니다!");
+        System.out.println(playerNames[0] + "의 최종 점수: " + player1Score);
+        System.out.println(playerNames[1] + "의 최종 점수: " + player2Score);
+
+        if (player1Score > player2Score) {
+            System.out.println(playerNames[0] + " 승리!");
+        } else if (player1Score < player2Score) {
+            System.out.println(playerNames[1] + " 승리!");
+        } else {
+            System.out.println("무승부!");
+        }
+
+        scanner.close();
     }
 
     // 1부터 8까지 세 번씩 들어간 숫자 리스트 생성
@@ -42,7 +86,7 @@ public class Step2 {
     // 초반에 X 출력
     public static void printInitialGrid() {
         for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 5; j++) {
+            for (int j = 0; j < 6; j++) {
                 System.out.print("X ");
             }
             System.out.println();
@@ -64,11 +108,11 @@ public class Step2 {
     }
 
     // 사용자에게 좌표 입력받기
-    public static int[][] getUserInput(int attemptNumber, int remainingCards) {
+    public static int[][] getUserInput(String currentPlayer) {
         Scanner scanner = new Scanner(System.in);
         int[][] inputs = new int[2][2];
 
-        System.out.printf("<시도 %d, 남은 카드: %d> 좌표를 입력하세요.\n", attemptNumber, remainingCards);
+        System.out.printf("<%s> 좌표를 입력하세요.\n", currentPlayer);
 
         for (int i = 0; i < 2; i++) {
             while (true) {
@@ -159,9 +203,9 @@ public class Step2 {
     }
 
     // 점수 계산 ... 단순로직
-    public static void updatePlayerScore(int currentPlayer, boolean isCorrect){
-        if(isCorrect){
-            if (currentPlayer == 1){
+    public static void updatePlayerScore(int currentPlayer, boolean isCorrect) {
+        if (isCorrect) {
+            if (currentPlayer == 1) {
                 player1Score += 10;
             } else {
                 player2Score += 10;
